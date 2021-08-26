@@ -1,9 +1,13 @@
 import {Entity, model, property} from '@loopback/repository';
 
+export enum CastMemberType {
+  DIRECTOR = 1,
+  ACTOR = 2,
+}
+
 @model()
-export class Category extends Entity {
+export class CastMember extends Entity {
   @property({
-    type: 'string',
     id: true,
     generated: false,
     required: true,
@@ -13,28 +17,24 @@ export class Category extends Entity {
   @property({
     type: 'string',
     required: true,
+    jsonSchema: {
+      minLength: 1,
+      maxLength: 255,
+    },
   })
   name: string;
 
   @property({
-    type: 'string',
-    required: false,
-    default: '',
+    type: 'number',
+    required: true,
   })
-  description: string;
-
-  @property({
-    type: 'boolean',
-    required: false,
-    default: true,
-  })
-  is_active: boolean;
+  type: number;
 
   @property({
     type: 'date',
     required: true,
   })
-  created_at: string; //iso 8601 YYYY-MM-DDT00:00:00
+  created_at: string;
 
   @property({
     type: 'date',
@@ -42,13 +42,13 @@ export class Category extends Entity {
   })
   updated_at: string;
 
-  constructor(data?: Partial<Category>) {
+  constructor(data?: Partial<CastMember>) {
     super(data);
   }
 }
 
-export interface CategoryRelations {
+export interface CastMemberRelations {
   // describe navigational properties here
 }
 
-export type CategoryWithRelations = Category & CategoryRelations;
+export type CastMemberWithRelations = CastMember & CastMemberRelations;

@@ -1,9 +1,8 @@
 import {Entity, model, property} from '@loopback/repository';
 
 @model()
-export class Category extends Entity {
+export class Genre extends Entity {
   @property({
-    type: 'string',
     id: true,
     generated: false,
     required: true,
@@ -17,13 +16,6 @@ export class Category extends Entity {
   name: string;
 
   @property({
-    type: 'string',
-    required: false,
-    default: '',
-  })
-  description: string;
-
-  @property({
     type: 'boolean',
     required: false,
     default: true,
@@ -34,7 +26,7 @@ export class Category extends Entity {
     type: 'date',
     required: true,
   })
-  created_at: string; //iso 8601 YYYY-MM-DDT00:00:00
+  created_at: string;
 
   @property({
     type: 'date',
@@ -42,13 +34,13 @@ export class Category extends Entity {
   })
   updated_at: string;
 
-  constructor(data?: Partial<Category>) {
+  constructor(data?: Partial<Genre>) {
     super(data);
   }
 }
 
-export interface CategoryRelations {
+export interface GenreRelations {
   // describe navigational properties here
 }
 
-export type CategoryWithRelations = Category & CategoryRelations;
+export type GenreWithRelations = Genre & GenreRelations;

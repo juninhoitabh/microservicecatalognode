@@ -1,9 +1,6 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import {Request, RestBindings, get, ResponseObject} from '@loopback/rest';
-import {
-  ClassDecoratorFactory,
-  inject,
-  MetadataInspector,
-} from '@loopback/context';
+import {ClassDecoratorFactory, inject} from '@loopback/context';
 import {CategoryRepository} from '../repositories';
 import {repository} from '@loopback/repository';
 
@@ -78,7 +75,8 @@ export class PingController {
     await this.categoryRepo.create({
       id: '1',
       name: 'minha primeira Categoria',
-      description: 'minha Categoria',
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
     });
     return this.categoryRepo.find();
   }

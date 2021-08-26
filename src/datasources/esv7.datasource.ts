@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import {inject, lifeCycleObserver, LifeCycleObserver} from '@loopback/core';
 import {juggler} from '@loopback/repository';
 
@@ -13,7 +14,38 @@ const config = {
     requestTimeout: process.env.ELASTIC_SEARCH_REQUEST_TIMEOUT,
     pingTimeout: process.env.ELASTIC_SEARCH_PING_TIMEOUT,
   },
-  mappingProperties: {},
+  mappingProperties: {
+    docType: {
+      type: 'keyword',
+    },
+    id: {
+      type: 'keyword',
+    },
+    name: {
+      type: 'text',
+      fields: {
+        keyword: {
+          type: 'keyword',
+          ignore_above: 256,
+        },
+      },
+    },
+    description: {
+      type: 'text',
+    },
+    type: {
+      type: 'byte',
+    },
+    is_active: {
+      type: 'boolean',
+    },
+    created_at: {
+      type: 'date',
+    },
+    updated_at: {
+      type: 'date',
+    },
+  },
 };
 
 // Observe application's life cycle to disconnect the datasource when
